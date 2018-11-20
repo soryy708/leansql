@@ -92,6 +92,8 @@ Condition functions follow the following conventions:
     	struct LeanSQL_ResultSet result;
     };
 
+---
+
 ### Possible Errors
 
     enum LeanSQL_ErrorType
