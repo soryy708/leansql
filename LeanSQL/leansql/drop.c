@@ -4,6 +4,7 @@
 #include <wchar.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 struct LeanSQL_ActionReport LeanSQL_dropTable(wchar_t* table)
 {
