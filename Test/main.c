@@ -27,7 +27,7 @@ int main()
 	struct LeanSQL_ActionReport table_creation = LeanSQL_createTable(L"Students", columns, 3);
 	if (table_creation.success)
 	{
-		wchar_t* data1[] = { L"319600276", L"Ivan Rubinson", L"soryy708@gmail.com" };
+		wchar_t* data1[] = { L"516519878", L"Ivan Rubinson", L"soryy708@gmail.com" };
 		wchar_t* data2[] = { L"645951238", L"Josh", L"joshman@gmail.com" };
 		wchar_t* data3[] = { L"315312321", L"Drake", L"darken@gmail.com" };
 		wchar_t* data4[] = { L"876432453", L"Steve", L"stevenson@gmail.com" };
