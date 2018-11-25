@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*))
+struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*, void*), void* extra_data)
 {
 	struct LeanSQL_ActionReport action_report;
 
@@ -83,7 +83,7 @@ struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar
 			{
 				for (unsigned int i = 0; i < column_count && !should_update; ++i)
 				{
-					if (condition(vector_getAt(header, i), vector_getAt(line, i)))
+					if (condition(vector_getAt(header, i), vector_getAt(line, i), extra_data))
 					{
 						should_update = true;
 					}

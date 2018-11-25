@@ -52,19 +52,21 @@ If `columns` is `NULL` and `columns_count` is `0`, adds the entire row. Otherwis
 
 ---
 
-    struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*));
+    struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*, void*), void* extra_data);
 Acts like an SQL `UPDATE`.
 Finds all rows in file called `table` that meet `condition`.
 If `columns` is `NULL`, the entire row is updated using `data`.
 Otherwise, only columns in `columns` are updated matching with `data`.
 `columns_count` is the size of both `columns` and `data`.
+`extra_data` is passed to `condition` as-is for your convenience.
 
 ---
 
-    struct LeanSQL_ActionReport LeanSQL_delete(wchar_t* table, bool(*condition)(wchar_t*, wchar_t*));
+    struct LeanSQL_ActionReport LeanSQL_delete(wchar_t* table, bool(*condition)(wchar_t*, wchar_t*, void*), void* extra_data);
 Acts like an SQL `DELETE`.
 Finds all rows in file called `table` that meet `condition`.
 These rows are deleted entirely from the file.
+`extra_data` is passed to `condition` as-is for your convenience.
 
 ---
 
@@ -73,6 +75,7 @@ These rows are deleted entirely from the file.
 Condition functions follow the following conventions:
 1. The first argument of the function is the column header
 2. The second argument of the function is the cell value
+3. The third, optional argument, is extra data passed to the condition as-is for your convenience.
 3. The condition is applied to all cells in a row, and is then logically ORed.
 
 ---
@@ -117,7 +120,7 @@ Condition functions follow the following conventions:
     #include <stdlib.h>
 
     void printTable(struct LeanSQL_ResultSet table);
-    bool condition(wchar_t* column_name, wchar_t* value);
+    bool condition(wchar_t* column_name, wchar_t* value, void*);
 
     int main()
     {
@@ -136,7 +139,7 @@ Condition functions follow the following conventions:
             LeanSQL_insert(L"Students", data3, 3);
             LeanSQL_insert(L"Students", data4, 3);
 
-            LeanSQL_delete(L"Students", condition);
+            LeanSQL_delete(L"Students", condition, NULL);
 
             struct LeanSQL_ActionReport select1 = LeanSQL_select(L"Students", NULL, 0, NULL);
 
@@ -175,7 +178,7 @@ Condition functions follow the following conventions:
         }
     }
 
-    bool condition(wchar_t* column_name, wchar_t* value)
+    bool condition(wchar_t* column_name, wchar_t* value, void* extra_data)
     {
         return wcscmp(column_name, L"Name") == 0 && wcscmp(value, L"Josh") == 0;
     }

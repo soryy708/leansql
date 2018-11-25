@@ -59,8 +59,8 @@ struct LeanSQL_ActionReport LeanSQL_select(wchar_t* table, wchar_t** columns, un
 
 // SQL: Update
 // Finds in file matching `condition`, and update `columns` using `data`.
-struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*));
+struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*, void*), void* extra_data);
 
 // SQL: Delete
 // Finds in file matching `condition`, and deletes the entire row.
-struct LeanSQL_ActionReport LeanSQL_delete(wchar_t* table, bool(*condition)(wchar_t*, wchar_t*));
+struct LeanSQL_ActionReport LeanSQL_delete(wchar_t* table, bool(*condition)(wchar_t*, wchar_t*, void*), void* extra_data);

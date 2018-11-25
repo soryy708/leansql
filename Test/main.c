@@ -14,7 +14,7 @@ void printTable(struct LeanSQL_ResultSet table)
 	}
 }
 
-bool condition(wchar_t* column_name, wchar_t* value)
+bool condition(wchar_t* column_name, wchar_t* value, void* extra_data)
 {
 	return wcscmp(column_name, L"Name") == 0 && wcscmp(value, L"Josh") == 0;
 }
@@ -36,7 +36,7 @@ int main()
 		LeanSQL_insert(L"Students", data3, 3);
 		LeanSQL_insert(L"Students", data4, 3);
 
-		LeanSQL_delete(L"Students", condition);
+		LeanSQL_delete(L"Students", condition, NULL);
 
 		struct LeanSQL_ActionReport select1 = LeanSQL_select(L"Students", NULL, 0, NULL, NULL);
 
