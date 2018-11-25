@@ -55,7 +55,7 @@ struct LeanSQL_ActionReport LeanSQL_insert(wchar_t* table, wchar_t** data, unsig
 
 // SQL: SELECT
 // Reads from file
-struct LeanSQL_ActionReport LeanSQL_select(wchar_t* table, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*));
+struct LeanSQL_ActionReport LeanSQL_select(wchar_t* table, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*, void*), void* extra_data);
 
 // SQL: Update
 // Finds in file matching `condition`, and update `columns` using `data`.

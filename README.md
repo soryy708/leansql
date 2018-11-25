@@ -43,11 +43,12 @@ Appends to file called `table` a row with `data_count` columns, defined by `data
 
 ---
 
-    struct LeanSQL_ActionReport LeanSQL_select(wchar_t* table, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*));
+    struct LeanSQL_ActionReport LeanSQL_select(wchar_t* table, wchar_t** columns, unsigned int columns_count, bool(*condition)(wchar_t*, wchar_t*, void*), void* extra_data);
 Acts like an SQL `SELECT`.
 Finds all rows in file called `table` that meet `condition`.
 All matching rows will be under `result`.
 If `columns` is `NULL` and `columns_count` is `0`, adds the entire row. Otherwise only the columns in `columns`.
+`extra_data` is passed to `condition` as-is for your convenience.
 
 ---
 

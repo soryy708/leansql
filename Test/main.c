@@ -38,7 +38,7 @@ int main()
 
 		LeanSQL_delete(L"Students", condition);
 
-		struct LeanSQL_ActionReport select1 = LeanSQL_select(L"Students", NULL, 0, NULL);
+		struct LeanSQL_ActionReport select1 = LeanSQL_select(L"Students", NULL, 0, NULL, NULL);
 
 		if (select1.success)
 		{
