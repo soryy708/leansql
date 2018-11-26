@@ -120,4 +120,4 @@ Condition functions follow the following conventions:
 
 ### Example
 
-    Example usage shown in [test project](https://github.com/soryy708/leansql/blob/master/Test/main.c).
+Example usage shown in [test project](https://github.com/soryy708/leansql/blob/master/Test/main.c).
