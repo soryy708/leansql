@@ -56,6 +56,8 @@ struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar
 		return action_report;
 	}
 	
+	action_report.result.columns = columns_count;
+	action_report.result.rows = 0;
 	long prev_line_pos = 0;
 	long cur_line_pos = 0;
 	struct LeanSQL_Vector* line;
@@ -140,6 +142,8 @@ struct LeanSQL_ActionReport LeanSQL_update(wchar_t* table, wchar_t** data, wchar
 				fseek(file, prev_line_pos, SEEK_SET);
 				fwprintf(file, L"%s", buffer);
 				fflush(file);
+
+				++action_report.result.rows;
 			}
 
 			vector_destroy(line);

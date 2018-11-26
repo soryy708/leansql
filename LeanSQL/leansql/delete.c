@@ -46,6 +46,8 @@ struct LeanSQL_ActionReport LeanSQL_delete(wchar_t* table, bool(*condition)(wcha
 		return action_report;
 	}
 
+	action_report.result.columns = vector_getSize(header);
+	action_report.result.rows = 0;
 	long prev_line_pos = 0;
 	long cur_line_pos = 0;
 	struct LeanSQL_Vector* line;
@@ -87,6 +89,8 @@ struct LeanSQL_ActionReport LeanSQL_delete(wchar_t* table, bool(*condition)(wcha
 				}
 				LeanSQL_shiftFileContents(file, line_length * -1);
 				fflush(file);
+
+				++action_report.result.rows;
 			}
 
 			vector_destroy(line);

@@ -31,14 +31,17 @@ int main()
 		wchar_t* data2[] = { L"645951238", L"Josh", L"joshman@gmail.com" };
 		wchar_t* data3[] = { L"315312321", L"Drake", L"darken@gmail.com" };
 		wchar_t* data4[] = { L"876432453", L"Steve", L"stevenson@gmail.com" };
-		LeanSQL_insert(L"Students", data1, 3);
-		LeanSQL_insert(L"Students", data2, 3);
-		LeanSQL_insert(L"Students", data3, 3);
-		LeanSQL_insert(L"Students", data4, 3);
+		struct LeanSQL_ActionReport insert1 = LeanSQL_insert(L"Students", data1, 3);
+		struct LeanSQL_ActionReport insert2 = LeanSQL_insert(L"Students", data2, 3);
+		struct LeanSQL_ActionReport insert3 = LeanSQL_insert(L"Students", data3, 3);
+		struct LeanSQL_ActionReport insert4 = LeanSQL_insert(L"Students", data4, 3);
+		wprintf(L"Insertion count: %d, %d, %d, %d\n", insert1.result.rows, insert2.result.rows, insert3.result.rows, insert4.result.rows);
 
-		LeanSQL_delete(L"Students", condition, NULL);
+		struct LeanSQL_ActionReport delete1 = LeanSQL_delete(L"Students", condition, NULL);
+		wprintf(L"Deletion count: %d\n", delete1.result.rows);
 
 		struct LeanSQL_ActionReport select1 = LeanSQL_select(L"Students", NULL, 0, NULL, NULL);
+		wprintf(L"Selection count: %d\n", select1.result.rows);
 
 		if (select1.success)
 		{

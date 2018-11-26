@@ -77,6 +77,8 @@ struct LeanSQL_ActionReport LeanSQL_insert(wchar_t* table, wchar_t** data, unsig
 	}
 
 	fclose(file);
+	action_report.result.rows = 1;
+	action_report.result.columns = data_count;
 	action_report.success = true;
 	return action_report;
 }
